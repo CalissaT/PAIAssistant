@@ -38,7 +38,7 @@ The best way to support Kwaai is to give us a ⭐ on [GitHub](https://github.com
 ```bash
     docker ps --format "{{.Names}}"
 ```
-8. Copy your pdf files to the container found in step 7 in a folder for eg. "docker cp pdfDirPath containername:/pai/api/data/pdfDirName". You can verify you did this step correctly by running "docker exec containername ls /pai/api/data and checking to see if your directory is there.
+8. Copy your pdf files to the container found in step 7 in a folder for eg. "docker cp pdfDirPath containername:/pai/api/data/pdfDirName". You can verify you did this step correctly by running "docker exec containername ls /pai/api/data" and checking to see if your directory is there.
 9. Update api/config.ini file to use the newly created folder in step 8 for indexing and querying by editing the "src_data_dir" line to match the directory of your new folder. 
 10. Download and Copy your model file to api/models folder using same step like you used the pdf copy in step 8. <a href="https://huggingface.co/TheBloke/openchat_3.5-GGUF/blob/main/openchat_3.5.Q4_K_M.gguf" target="_blank">Openchat 3.5</a>
 11. Update the api/config.ini to reflect the model file name.
