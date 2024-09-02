@@ -22,18 +22,24 @@ The best way to support Kwaai is to give us a ⭐ on [GitHub](https://github.com
 ![](doc/DemoPA.gif) 
 
 ### Docker setup (Required: Nvidia RTX series GPU)
-1. Install docker desktop from <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a>
-2. Clone the git repository
-3. Change to PAIAssistant folder and run "docker-compose build"
+1. Install Docker Desktop from <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a> and Git from <a href="https://git-scm.com/downloads"/" target="_blank"> if not already installed.
+2. Open the terminal and clone the git repository using 
+```bash
+   git clone https://github.com/Kwaai-AI-Lab/PAIAssistant
+```
+3. Change to PAIAssistant folder using "cd PAIAssistant" and run "docker-compose build"
 4. Once Step 3 completes you should have paiassistant-pai:latest image in docker ( mine was about 20GB or so )
-5. Run image using "docker run -it --rm -p 4000:4000 --gpus all paiassistant-pai:latest"
+5. Run image using
+```bash
+    docker run -it --rm -p 4000:4000 --gpus all paiassistant-pai:latest
+```
 6. At this point you should be able to visit https://127.0.0.1:4000. It wont function fully until you populate it with your data.
-7. Find your container name using  
+7. Find your container name using 
 ```bash
     docker ps --format "{{.Names}}"
 ```
-8. Copy pdf files to container in a folder for eg. "docker cp Mypdfdir (containername from step 7):/pai/api/data/Mypdfdir
-9. Update api/config.ini file to use the newly created folder in step 8 for indexing and querying.
+8. Copy your pdf files to the container found in step 7 in a folder for eg. "docker cp pdfDirPath containername:/pai/api/data/pdfDirName". You can verify you did this step correctly by running "docker exec containername ls /pai/api/data and checking to see if your directory is there.
+9. Update api/config.ini file to use the newly created folder in step 8 for indexing and querying by editing the "src_data_dir" line to match the directory of your new folder. 
 10. Download and Copy your model file to api/models folder using same step like you used the pdf copy in step 8. <a href="https://huggingface.co/TheBloke/openchat_3.5-GGUF/blob/main/openchat_3.5.Q4_K_M.gguf" target="_blank">Openchat 3.5</a>
 11. Update the api/config.ini to reflect the model file name.
 12. Run api/createindex.py to create the index.
